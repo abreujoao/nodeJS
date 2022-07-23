@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Produtos</title>
+</head>
+<body>
+    <body onload="load()">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody id="linhas">
+                 
+            </tbody>
+        </table>
+        <script>
+            function load(){
+                fetch('http://localhost:5210/produtos')
+                .then(data => data.json())
+                .then(result => display(result))
+            }
+            function display(dados){
+                var linha = ''
+                for(let i=0; i<dados.length;i++){
+                    linha +=`<tr>
+                        <td>${dados[i].id}</td>
+                        <td>${dados[i].descricao}</td>
+                        <td>${dados[i].preco}</td>
+                        <td>${dados[i].quantidade}</td>
+                        </tr>`
+                }
+                document.getElementById("linhas").innerHTML=linha
+            }
+        </script>
+</body>
+</html>

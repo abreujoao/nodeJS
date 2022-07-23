@@ -7,17 +7,17 @@ app.use(express.json())
 
 var listaProdutos = [
     {
-        id : 1000,
+        id :1,
         descricao:"Picanha",
         preco:122.00,
         quantidade:200
 
     },
     {
-        id:2122,
+        id:2,
         descricao:"Contra Filé",
         preco:100,
-        quantidade:134
+        quantidade:500
     }
 ]
 
@@ -36,3 +36,18 @@ app.get('/produtos/:idprodutos', (req,res)=>{
     }
     res.send(produtos)
 })
+
+app.post('/produtos', (req,res)=>{
+    let produto = {
+        id:listaProdutos.length+1,
+        descricao: req.body.descricao,
+        preco: req.body.preco,
+        quantidade: req.body.quantidade
+    }
+    listaProdutos.push(produto)
+    res.send(produto)
+})
+
+
+
+app.listen(port, ()=>{console.log(`executando na porta http://localhost:5210`);})
